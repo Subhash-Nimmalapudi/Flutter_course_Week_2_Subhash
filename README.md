@@ -1,6 +1,9 @@
 # myinstagram
 
-A new Flutter project.
+This Flutter project is a replica of popular application Instagram.
+This application is named as 'Myinstagram'.
+This project is developed using Flutter and Firebase.
+This app is developed for android by 'Subhash Nimmalapudi'.
 
 ## Getting Started
 

@@ -10,6 +10,7 @@ import 'package:myinstagram/pages/mainfeed.dart';
 import 'package:myinstagram/pages/usersetup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class Signup extends StatefulWidget {
   static final String id= 'signup';
   @override
