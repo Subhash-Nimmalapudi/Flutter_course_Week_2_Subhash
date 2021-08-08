@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myinstagram/pages/mainfeed.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Chats extends StatefulWidget {
   
@@ -10,6 +11,21 @@ class Chats extends StatefulWidget {
 }
 
 class _ChatsState extends State<Chats> {
+  
+  
+  String? username = '', bio = '', description = ' ', profilepic = '';
+  
+  void initState() {
+    getusername();
+  }
+
+  getusername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('username');
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +39,7 @@ class _ChatsState extends State<Chats> {
           )
         ],
         leading: IconButton(
-          onPressed:() => Navigator.pop(context, Mainfeed.id), 
+          onPressed:() => Navigator.pop(context), 
           icon: Icon(Icons.keyboard_arrow_left,
           color: Colors.black,
           size:35,) ,
@@ -31,8 +47,8 @@ class _ChatsState extends State<Chats> {
         title: Center(
           child: Row(
             children:[
-              SizedBox(width: 50,),
-              Text('Brahmi_007',
+              SizedBox(width: 63),
+              Text(username!,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,

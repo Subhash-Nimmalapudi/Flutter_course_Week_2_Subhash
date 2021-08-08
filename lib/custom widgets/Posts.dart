@@ -1,18 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:myinstagram/custom%20widgets/gradient_ring_widget.dart';
 import 'package:like_button/like_button.dart';
-import 'package:get/get.dart';
+
 
 class Posts extends StatelessWidget {
 
   final String? profileimage;
   final String? username;
-  final String? location;
+  final String? time;
   final String? postimage;
   final String? caption;
-
-  const Posts({this.profileimage,this.username,this.location,this.postimage,this.caption });
-
+   
+  
+  const Posts({this.profileimage,this.username,this.time,this.postimage,this.caption });
+  
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -24,8 +26,11 @@ class Posts extends StatelessWidget {
                 WGradientRing(
                   padding: 1,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(profileimage!),
                     radius: 25,
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(profileimage!),
+                      radius: 25,
+                    ),
                   ),
                 ),
                 SizedBox(width: 5,),
@@ -36,19 +41,16 @@ class Posts extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),),
-                    Text(location!,
-                    style: TextStyle(
-                      fontSize: 13,
-                    ),),
+                   Text(time!)
                   ],
                 ),
               ],
             ),
             SizedBox(height:8),
-            Image(image: AssetImage(postimage!),
+            Image(image: NetworkImage(postimage!),
             width: 1080,
             height: 350,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover ,
             ),
             
             SizedBox(height: 8,),
@@ -57,12 +59,52 @@ class Posts extends StatelessWidget {
                 SizedBox(width: 10,),
                 LikeButton(
                   size: 30,
+                  onTap: (isLiked) async{
+                   if (!isLiked) {
+  final passwordCheck = SnackBar(
+    duration: Duration(seconds: 1) ,
+         content: Column(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             Center(child: Text("You Liked this Post",
+             style: TextStyle(
+               color: Colors.blue
+             ),)),
+           ],
+         ),
+         backgroundColor: Colors.white,
+         elevation: 2,
+       );
+       ScaffoldMessenger.of(context).showSnackBar(passwordCheck);
+       return true;
+}
+else{
+final passwordCheck = SnackBar(
+  duration: Duration(seconds: 1) ,
+         content: Column(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             Center(child: Text("You Disliked this Post",
+             style: TextStyle(
+               color: Colors.blue
+             ),)),
+           ],
+         ),
+         backgroundColor: Colors.white,
+         elevation: 2,
+       );
+       ScaffoldMessenger.of(context).showSnackBar(passwordCheck);  
+       
+      return false;
+}
+                        
+                  },
                   
                 ),
                 SizedBox(width: 10,),
                 Icon(Icons.textsms_outlined,
                 size: 30,),
-                SizedBox(width: 10,),
+                SizedBox(width: 16,),
                 Icon(Icons.send,
                 size: 30,),
               ],
@@ -78,6 +120,7 @@ class Posts extends StatelessWidget {
             Text(caption!),
               ],
             ),
+            Divider()
           ],
         ),
       );

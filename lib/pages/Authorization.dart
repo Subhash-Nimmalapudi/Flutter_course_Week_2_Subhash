@@ -32,7 +32,7 @@ class _AuthorizationState extends State<Authorization> {
               Container(
                 width:300,
                 child: OutlinedButton(
-                  onPressed:() => Navigator.pushNamed(context, Login.id),
+                  onPressed:() => Navigator.pushReplacementNamed(context, Login.id),
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.blue,
                   ),
@@ -49,7 +49,7 @@ class _AuthorizationState extends State<Authorization> {
                 width: 300,
                 child: OutlinedButton(
                   onPressed:(){
-                     Navigator.pushNamed(context, Signup.id);
+                     Navigator.pushReplacementNamed(context, Signup.id);
                   },
                   style: OutlinedButton.styleFrom(
                     onSurface: Colors.blue,
